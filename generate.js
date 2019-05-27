@@ -74,6 +74,12 @@ const hasStaticLocation = locations => typeof location === 'string' ?
   locations.includes('stat') :
   Object.values(locations).some(location => location.includes('stat'))
 
+const getCacheLocations = locations => (typeof location === 'string' ?
+  [ locations.match('cache (.*)') ] :
+  Object.values(locations).map(location => location.includes('cache (.*)')))
+  .filter(match => match && match[1])
+  .map(match => match[1])
+
 const config = JSON.parse(fs.readFileSync('config.json', 'utf8'))
 
 async function main () {
@@ -82,6 +88,7 @@ async function main () {
   Object.entries(config).forEach(([host, locations]) => {
     if (host.startsWith('_')) return
     fs.writeFileSync(`${host.replace('*', 'wildcard')}.conf`, `
+${getCacheLocations(locations).map(name => `proxy_cache_path /var/nginx/cache levels=1:2 keys_zone=${name}:10m inactive=48h max_size=1g;\n`)}
 
 server {
   listen 443 ssl http2;
