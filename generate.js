@@ -103,7 +103,7 @@ server {
 main()
 
 const getCertPaths = certs => domain => {
-  const wildcard = [ '\\*', ...domain.split('.').slice(1) ].join('.')
+  const wildcard = [ '*', ...domain.split('.').slice(1) ].join('.')
   const cert = certs.find(cert => cert.domains.includes(domain) || cert.domains.includes(wildcard))
   if (!cert) {
     console.log(`Certificate not found for domain ${domain}!`)
@@ -117,7 +117,7 @@ const getCertPaths = certs => domain => {
 }
 
 async function getCertificates () {
-  const { stdout: certificates } = await exec('certbot certificates')
+  const { stdout: certificates } = await exec('sudo certbot certificates')
   const certificateTemplate = `
   Certificate Name: (.*)
     Domains: (.*)
