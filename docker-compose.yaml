@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    ports:
+      - 0.0.0.0:80:80
+      - 0.0.0.0:443:443
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./:/etc/nginx/conf.d
+      - ./auth:/etc/nginx/auth
+      - ./cache:/etc/nginx/cache
+      - /var/www:/var/www
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.64.0/24
