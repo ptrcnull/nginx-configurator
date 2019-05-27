@@ -70,11 +70,11 @@ function parseLocation ([ path, loc ]) {
   return location(path, options)
 }
 
-const hasStaticLocation = locations => typeof location === 'string' ?
+const hasStaticLocation = locations => typeof locations === 'string' ?
   locations.includes('stat') :
   Object.values(locations).some(location => location.includes('stat'))
 
-const getCacheLocations = locations => (typeof location === 'string' ?
+const getCacheLocations = locations => (typeof locations === 'string' ?
   [ locations.match('cache (.*)') ] :
   Object.values(locations).map(location => location.includes('cache (.*)')))
   .filter(match => match && match[1])
@@ -93,7 +93,7 @@ ${getCacheLocations(locations).map(name => `proxy_cache_path /var/nginx/cache le
 server {
   listen 443 ssl http2;
   listen [::]:443 ssl http2;
-
+  
   ${ssl(host)}
 
   server_name ${host};
@@ -109,18 +109,20 @@ server {
 }
 main()
 
-const getCertPaths = certs => domain => {
-  const wildcard = [ '*', ...domain.split('.').slice(1) ].join('.')
-  const cert = certs.find(cert => cert.domains.includes(domain) || cert.domains.includes(wildcard))
-  if (!cert) {
-    console.log(`Certificate not found for domain ${domain}!`)
-    process.exit(1)
-  }
-  if (cert.expiryStatus.startsWith('INVALID')) console.log(`WARNING: certificate ${cert.name} is invalid! (${cert.expiryStatus})`)
-  return `
+function getCertPaths (certs) {
+  return domain => {
+    const wildcard = [ '*', ...domain.split('.').slice(1) ].join('.')
+    const cert = certs.find(cert => cert.domains.includes(domain) || cert.domains.includes(wildcard))
+    if (!cert) {
+      console.log(`Certificate not found for domain ${domain}!`)
+      process.exit(1)
+    }
+    if (cert.expiryStatus.startsWith('INVALID')) console.log(`WARNING: certificate ${cert.name} is invalid! (${cert.expiryStatus})`)
+    return `
     ssl_certificate ${cert.certPath};
     ssl_certificate_key ${cert.keyPath};
   `.trim()
+  }
 }
 
 async function getCertificates () {
