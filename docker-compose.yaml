@@ -12,7 +12,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - ./:/etc/nginx/conf.d
       - ./auth:/etc/nginx/auth
-      - ./cache:/etc/nginx/cache
+      - ./cache:/var/nginx/cache
       - /var/www:/var/www
 
 networks:
