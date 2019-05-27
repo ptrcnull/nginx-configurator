@@ -23,7 +23,7 @@ const handlers = {
     add_header Cache-Control "public";
 
     proxy_buffering on;
-    proxy_cache /etc/nginx/cache/${name};
+    proxy_cache ${name};
     proxy_cache_valid 200 1d;
     proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_503 http_504;
   `,
