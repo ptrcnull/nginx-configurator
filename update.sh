@@ -1,3 +1,2 @@
 #!/bin/bash
-docker-compose down
-git pull && node generate.js && docker-compose up -d
+git pull && node generate.js && docker-compose down && docker-compose up -d
