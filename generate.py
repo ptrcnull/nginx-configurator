@@ -8,7 +8,6 @@ if __name__ == '__main__':
     config = Config('config.json')
     print(config.domains)
     for domain in config.domains:
-        with open('{}.conf'.format(domain.host.replace('*', 'wildcard')), 'w') as f:
+        host = domain.host.replace('*', 'wildcard')
+        with open(f'{host}.conf', 'w') as f:
             f.write(server(certificates, domain))
-    # print(certificates.get_for_domain('bjorn.ml'))
-    # print(get_certificates())

@@ -8,9 +8,9 @@ from typing import List
 class Certificate:
     regex = '''Certificate Name: (.*)
     Domains: (.*)
-    Expiry Date: .*? \\((?P<expires>.*)\\)
-    Certificate Path: (?P<certificate_path>.*)
-    Private Key Path: (?P<private_key_path>.*)'''
+    Expiry Date: .*? \\((.*)\\)
+    Certificate Path: (.*)
+    Private Key Path: (.*)'''
     name: str
     domains: List[str]
     expiry_status: str
@@ -19,11 +19,11 @@ class Certificate:
 
     def get_paths(self):
         if self.expiry_status.startswith('INVALID'):
-            print('WARNING: certificate {cert.name} is invalid! ({cert.expiry_status})'.format(cert=self))
-        return '''
-            ssl_certificate {cert.certificate_path};
-            ssl_certificate_key {cert.private_key_path};
-        '''.format(cert=self)
+            print(f'WARNING: certificate {self.name} is invalid! ({self.expiry_status})')
+        return f'''
+            ssl_certificate {self.certificate_path};
+            ssl_certificate_key {self.private_key_path};
+        '''
 
 
 @dataclass
