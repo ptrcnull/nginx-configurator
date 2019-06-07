@@ -6,7 +6,6 @@ from configurator.templates import server
 if __name__ == '__main__':
     certificates = get_certificates()
     config = Config('config.json')
-    print(config.domains)
     for domain in config.domains:
         host = domain.host.replace('*', 'wildcard')
         with open(f'{host}.conf', 'w') as f:

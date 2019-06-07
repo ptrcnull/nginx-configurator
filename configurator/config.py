@@ -33,11 +33,13 @@ class Config:
         try:
             with open(path) as f:
                 domains = json.load(f)
-                # for host, locations in domains.items():
-                #
-                #     print(host)
-                #     print(locations)
-                self.domains = list(map(parse_domain, domains.items()))
+                self.domains = list(map(
+                    parse_domain,
+                    filter(
+                        lambda d: d[0].startswith('_'),
+                        domains.items()
+                    )
+                ))
         except FileNotFoundError:
             print('Configuration file not found!')
             exit(1)
