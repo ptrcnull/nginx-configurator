@@ -1,7 +1,7 @@
-from configurator.certificates import Certificates
-from configurator.config import Domain
-from configurator.formatter import formatted
-from configurator.handlers import handle
+from .certificates import Certificates
+from .config import Domain
+from .formatter import formatted
+from .handlers import handle
 
 
 def cache_template(name: str):

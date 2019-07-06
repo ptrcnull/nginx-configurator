@@ -1,4 +1,4 @@
-from configurator.config import Handler
+from .config import Handler
 
 
 def target(port: str) -> str:
