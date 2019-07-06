@@ -2,3 +2,4 @@
 cache/*
 !https-redirect.conf
 !ws-proxy.conf
+__pycache__/

@@ -9,7 +9,7 @@ SSL forced by default (using Certbot)
 - Fork this repo
 - Add your config.json file
 - Make sure you have following tools in your PATH
-  * Node.js
+  * Python 3 or Node.js
   * Certbot
   * docker-compose
 - Run `update.sh`
