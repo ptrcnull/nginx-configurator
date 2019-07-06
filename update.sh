@@ -1,2 +1,2 @@
 #!/bin/bash
-git pull && python3 generate.js && docker-compose down && docker-compose up -d
+git pull && python3 generate.py && docker-compose up -d --force-recreate
