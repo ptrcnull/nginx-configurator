@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-from configurator.certificates import get_certificates
-from configurator.config import Config
-from configurator.templates import server
+from generator.certificates import get_certificates
+from generator.config import Config
+from generator.templates import server
 
 if __name__ == '__main__':
     certificates = get_certificates()
