@@ -16,6 +16,12 @@ def handle(handler: Handler) -> str:
     if handler.name == 'proxy':
         return f'''
             proxy_pass {target(options)};
+            proxy_http_version 1.1;
+
+            # WebSocket-specific
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -29,27 +35,14 @@ def handle(handler: Handler) -> str:
             expires 30d;
             add_header Pragma public;
             add_header Cache-Control "public";
-        
+
             proxy_buffering on;
             proxy_cache {options};
             proxy_cache_valid 200 1d;
             proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_503 http_504;
         '''
-    if handler.name == 'wsproxy':
-        return f'''
-              try_files /nonexistent @$type;
-            }}
-        
-            location @ws {{
-              proxy_pass {target(options)};
-              proxy_http_version 1.1;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection $connection_upgrade;
-            }}
-        
-            location @web {{
-              proxy_pass {target(options)};
-        '''
+    if handler.name == 'origin-http':
+        return 'proxy_set_header Origin http://$host;'
     if handler.name == 'redirect':
         return f'return 301 {options};'
     if handler.name == 'auth':
