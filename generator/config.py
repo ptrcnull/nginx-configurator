@@ -36,7 +36,7 @@ class Config:
                 self.domains = list(map(
                     parse_domain,
                     filter(
-                        lambda d: d[0].startswith('_'),
+                        lambda d: not d[0].startswith('_'),
                         domains.items()
                     )
                 ))
