@@ -1,6 +1,6 @@
 import subprocess
 import re
-from dataclasses import dataclass
+from .dataclasses import dataclass
 from typing import List
 
 
@@ -52,12 +52,12 @@ def parse_certificates(result: subprocess.CompletedProcess):
     stdout = result.stdout.decode('utf-8')
     stderr = result.stderr.decode('utf-8')
     if len(stdout) == 0:
-        print('Error occured while getting certificates from certbot:')
         if '[Errno 13] Permission denied' in stderr:
-            print('Insufficient permissions, elevating via sudo...')
+            print('Insufficient permissions to run Certbot, elevating via sudo...')
             result = subprocess.run(['sudo', 'certbot', 'certificates'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             return parse_certificates(result)
         else:
+            print('Error occured while getting certificates from certbot:')
             print(stderr)
             exit(1)
     else:

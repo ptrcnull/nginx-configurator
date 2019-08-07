@@ -1,6 +1,6 @@
 import itertools
 import json
-from dataclasses import dataclass
+from .dataclasses import dataclass
 from typing import List
 
 

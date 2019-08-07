@@ -10,7 +10,7 @@ services:
       - 0.0.0.0:443:443
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
-      - ./:/etc/nginx/conf.d
+      - ./nginx:/etc/nginx/conf.d
       - ./auth:/etc/nginx/auth
       - ./cache:/var/nginx/cache
       - /var/www:/var/www
