@@ -20,7 +20,6 @@ SSL forced by default (using Certbot)
 |     stat    | A static directory with optional custom directory<br>Default: `/var/www/domain.tld` | `stat`<br>`stat /var/website` |
 |   redirect  | `301` redirect to specified URL | `redirect https://google.com` |
 |    proxy    | Reverse proxy with port/IP and optional path | `proxy 1122`<br>`proxy 1234/path`<br>`proxy https://github.com/` |
-|   wsproxy   | Same as `proxy`, but supports WebSockets | ^ |
 | nohostproxy | Same as `proxy`, but without Host header | ^ |
 |    cache    | Used only with other keywords, specifies Nginx cache | `stat; cache custom-name`<br>`proxy https://assets.domain.tld; cache assets` |
 |     auth    | Used only with other keywords, specifies .htaccess-compatible file in auth/ directory | `stat; auth test-auth` |
