@@ -56,4 +56,7 @@ def handle(handler: Handler) -> str:
             auth_basic "Authorization required";
             auth_basic_user_file /etc/nginx/auth/{options};
         '''
+    if handler.name == 'custom':
+        with open(options) as file:
+            return file.read()
     return f'# {handler.name} {handler.options}'

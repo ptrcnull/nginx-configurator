@@ -22,6 +22,7 @@ SSL forced by default (using Certbot)
 |   redirect  | `301` redirect to specified URL | `redirect https://google.com` |
 |    proxy    | Reverse proxy with port/IP and optional path | `proxy 1122`<br>`proxy 1234/path`<br>`proxy https://github.com/` |
 | nohostproxy | Same as `proxy`, but without Host header | ^ |
+|   custom    | Specifies a file which contains location handler | `custom ./custom-test.conf` |
 |    cache    | Used only with other keywords, specifies Nginx cache | `stat; cache custom-name`<br>`proxy https://assets.domain.tld; cache assets` |
 |     auth    | Used only with other keywords, specifies .htaccess-compatible file in auth/ directory | `stat; auth test-auth` |
 
