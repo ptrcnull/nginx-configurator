@@ -13,6 +13,12 @@ def handle(handler: Handler) -> str:
             {root}
             try_files $uri $uri/ =403;
         '''
+    if handler.name == 'angular':
+        root = f'root /var/www/{options};' if options != '' else ''
+        return f'''
+            {root}
+            try_files $uri $uri/ /index.html =403;
+        '''
     if handler.name == 'proxy':
         return f'''
             proxy_pass {target(options)};

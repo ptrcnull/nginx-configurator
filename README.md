@@ -18,6 +18,7 @@ SSL forced by default (using Certbot)
 |   Keyword   | Description | Examples |
 |  ---------  | ----------- | -------- |
 |     stat    | A static directory with optional custom directory<br>Default: `/var/www/domain.tld` | `stat`<br>`stat /var/website` |
+|   angular   | Like `stat`, but with fallback to /index.html | `angular`<br>`angular /var/www/website/dist` |
 |   redirect  | `301` redirect to specified URL | `redirect https://google.com` |
 |    proxy    | Reverse proxy with port/IP and optional path | `proxy 1122`<br>`proxy 1234/path`<br>`proxy https://github.com/` |
 | nohostproxy | Same as `proxy`, but without Host header | ^ |
