@@ -23,12 +23,15 @@ if __name__ == '__main__':
 
         output = ''
 
-        try:
-            certificates.get_for_domain(domain.host)
-            output = server(certificates, domain)
-        except StopIteration:
-            print(f'Certificate not found for {domain.host}!')
+        if host.startswith('http:'):
             output = server_http(domain)
+        else:
+            try:
+                certificates.get_for_domain(domain.host)
+                output = server(certificates, domain)
+            except StopIteration:
+                print(f'Certificate not found for {domain.host}!')
+                output = server_http(domain)
 
         with open(path.join(args.out, f'{host}.conf'), 'w') as f:
             f.write(output)
