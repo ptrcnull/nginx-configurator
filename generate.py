@@ -4,7 +4,7 @@ from os import path
 
 from generator.certificates import get_certificates
 from generator.config import Config
-from generator.templates import server
+from generator.templates import server, server_http
 import argparse
 
 if __name__ == '__main__':
@@ -21,11 +21,14 @@ if __name__ == '__main__':
     for domain in config.domains:
         host = domain.host.replace('*', 'wildcard')
 
+        output = ''
+
         try:
             certificates.get_for_domain(domain.host)
+            output = server(certificates, domain)
         except StopIteration:
             print(f'Certificate not found for {domain.host}!')
-            continue
+            output = server_http(domain)
 
         with open(path.join(args.out, f'{host}.conf'), 'w') as f:
-            f.write(server(certificates, domain))
+            f.write(output)

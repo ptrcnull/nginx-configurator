@@ -52,3 +52,17 @@ def server(certificates: Certificates, domain: Domain) -> str:
         }}
     '''
     return formatted(rendered)
+
+
+def server_http(domain: Domain) -> str:
+    rendered = f'''
+        {cache(domain)}
+        
+        server {{
+            server_name {domain.host};
+            {static(domain)}
+            {locations(domain)}
+        }}
+    '''
+    return formatted(rendered)
+
