@@ -36,6 +36,26 @@ def handle(handler: Handler) -> str:
         '''
     if handler.name == 'nohostproxy':
         return f'proxy_pass {target(options)};'
+    if handler.name == 'fpm':
+        host = options if ':' in options else f'127.0.0.1:{options}'
+        # https://www.pascallandau.com/blog/php-php-fpm-and-nginx-on-docker-in-windows-10/
+        return f'''
+            }}
+
+            location ~ [^/]\\.php(/|$) {{
+                fastcgi_split_path_info ^(.+?\\.php)(/.*)$;
+                if (!-f $document_root$fastcgi_script_name) {{
+                    return 404;
+                }}
+        
+                include fastcgi_params;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param PATH_INFO       $fastcgi_path_info;
+                fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+            
+                fastcgi_pass   {host};
+                fastcgi_index  index.php;
+      '''
     if handler.name == 'cache':
         return f'''
             expires 30d;
