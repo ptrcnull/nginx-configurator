@@ -17,12 +17,15 @@ def cache(domain: Domain) -> str:
 
 
 def static(domain: Domain) -> str:
-    handlers = domain.find_handlers('cache')
-    if handlers != 0:
+    stat_handlers = domain.find_handlers('stat')
+    fpm_handlers = domain.find_handlers('fpm')
+    if len(stat_handlers) != 0:
         return f'''
             root /var/www/{domain.host.replace('*', 'wildcard')};
-            index index.html index.htm;
+            index index.html index.htm{' index.php' if len(fpm_handlers) != 0 else ''};
         '''
+    else:
+        return ''
 
 
 def locations(domain: Domain) -> str:
