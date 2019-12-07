@@ -9,7 +9,7 @@ import argparse
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate Nginx configuration.')
-    parser.add_argument('-o', '--out', default='.', metavar='path',
+    parser.add_argument('-o', '--out', default='./nginx', metavar='path',
                         help='Output directory (default: current directory)')
     args = parser.parse_args()
     # print(args)

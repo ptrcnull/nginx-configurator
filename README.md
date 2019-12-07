@@ -3,15 +3,15 @@ Simple JSON-based Nginx configurator
 
 SSL forced by default (using Certbot)
 
-**Tested only on Ubuntu 19.04**, but should work on other platforms.
+**Tested only on Ubuntu (18.04 and 19.04)**, but should work on other platforms.
 
 # Installation
 - Fork this repo
 - Add your config.json file
 - Make sure you have following tools in your PATH
-  * Python 3 or Node.js
+  * Python 3.6
   * Certbot
-  * docker-compose
+  * Docker with docker-compose
 - Run `update.sh`
 
 # Configuration

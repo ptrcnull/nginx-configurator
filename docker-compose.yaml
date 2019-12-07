@@ -5,6 +5,7 @@ services:
     container_name: nginx
     image: nginx:latest
     restart: always
+    network_mode: host
     ports:
       - 0.0.0.0:80:80
       - 0.0.0.0:443:443
@@ -14,11 +15,3 @@ services:
       - ./auth:/etc/nginx/auth
       - ./cache:/var/nginx/cache
       - /var/www:/var/www
-
-networks:
-  default:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.16.64.0/24

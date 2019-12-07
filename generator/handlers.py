@@ -2,7 +2,7 @@ from .config import Handler
 
 
 def target(port: str) -> str:
-    return port if ':' in port else f'http://172.16.64.1:{port}'
+    return port if ':' in port else f'http://127.0.0.1:{port}'
 
 
 def handle(handler: Handler) -> str:
