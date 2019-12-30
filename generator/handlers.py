@@ -19,6 +19,17 @@ def handle(handler: Handler) -> str:
             {root}
             try_files $uri $uri/ /index.html =403;
         '''
+    if handler.name == 'webdav':
+        root = f'root /var/www/{options};' if options != '' else ''
+        return f'''
+            {root}
+            dav_methods PUT DELETE MKCOL COPY MOVE;
+            dav_ext_methods PROPFIND OPTIONS;
+            create_full_put_path on;
+            dav_access user:rw group:rw all:r;
+            autoindex on;
+            allow all;
+        '''
     if handler.name == 'proxy':
         return f'''
             proxy_pass {target(options)};

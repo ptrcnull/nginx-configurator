@@ -17,7 +17,7 @@ def cache(domain: Domain) -> str:
 
 
 def static(domain: Domain) -> str:
-    stat_handlers = domain.find_handlers('stat')
+    stat_handlers = domain.find_handlers('stat') + domain.find_handlers('webdav')
     fpm_handlers = domain.find_handlers('fpm')
     if len(stat_handlers) != 0:
         return f'''
