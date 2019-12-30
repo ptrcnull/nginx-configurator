@@ -40,15 +40,19 @@ def locations(domain: Domain) -> str:
 
 
 def server(certificates: Certificates, domain: Domain) -> str:
+    log_host = domain.host.replace('*', 'wildcard')
     rendered = f'''
         {cache(domain)}
-        
+
         server {{
             listen 443 ssl http2;
             listen [::]:443 ssl http2;
-            
+
+            access_log /var/log/nginx/access/{log_host}.log vcombined;
+            error_log /var/log/nginx/error/{log_host}.log;
+
             {certificates.get_for_domain(domain.host).get_paths()}
-            
+
             server_name {domain.host};
             {static(domain)}
             {locations(domain)}

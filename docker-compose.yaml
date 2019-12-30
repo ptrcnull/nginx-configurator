@@ -14,4 +14,5 @@ services:
       - ./nginx:/etc/nginx/conf.d
       - ./auth:/etc/nginx/auth
       - ./cache:/var/nginx/cache
+      - ./logs:/var/log/nginx
       - /var/www:/var/www
