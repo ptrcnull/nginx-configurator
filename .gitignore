@@ -5,3 +5,5 @@ nginx/*.conf
 !nginx/https-redirect.conf
 !nginx/ws-proxy.conf
 !nginx/$_log-format.conf
+
+logs/
