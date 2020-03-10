@@ -13,6 +13,16 @@ def handle(handler: Handler) -> str:
             {root}
             try_files $uri $uri/ =403;
         '''
+    if handler.name == 'index':
+        root = f'root /var/www/{options};' if options != '' else ''
+        return f'''
+            {root}
+            try_files $uri $uri/ =403;
+            
+            autoindex on;
+            autoindex_exact_size off;
+            charset utf-8;
+        '''
     if handler.name == 'angular':
         root = f'root /var/www/{options};' if options != '' else ''
         return f'''

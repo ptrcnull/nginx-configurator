@@ -17,7 +17,7 @@ def cache(domain: Domain) -> str:
 
 
 def static(domain: Domain) -> str:
-    stat_handlers = domain.find_handlers('stat') + domain.find_handlers('webdav')
+    stat_handlers = domain.find_handlers('stat') + domain.find_handlers('webdav') + domain.find_handlers('index')
     fpm_handlers = domain.find_handlers('fpm')
     if len(stat_handlers) != 0:
         return f'''
@@ -66,6 +66,9 @@ def server_http(domain: Domain) -> str:
         {cache(domain)}
         
         server {{
+            listen 80;
+            listen [::]:80;
+
             server_name {domain.host};
             {static(domain)}
             {locations(domain)}
