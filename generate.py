@@ -24,7 +24,6 @@ def generate(args):
             output = server_http(domain)
         else:
             if certificates.has(domain.host):
-                print('Certificates HAS domain.host:', domain.host)
                 output = server(certificates, domain)
             else:
                 print(f'Certificate not found for {domain.host}!')
