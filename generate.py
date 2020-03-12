@@ -21,6 +21,8 @@ def generate(args):
         output = ''
 
         if host.startswith('http:'):
+            domain.host = domain.host[5:]
+            host = host[5:]
             output = server_http(domain)
         else:
             if certificates.has(domain.host):
