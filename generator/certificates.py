@@ -84,7 +84,7 @@ def parse_certificates(result: Tuple[str, str]):
 
 
 def issue_certificate(domain: str) -> Certificate or None:
-    domain = re.sub(r'[^a-zA-Z.]*', '', domain)
+    domain = re.sub(r'[^a-zA-Z0-9.]*', '', domain)
     print(f'Trying to issue a certificate for domain {domain}...')
     os.system(f'certbot certonly -d {domain}')
     new_certs = get_certificates()
