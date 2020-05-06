@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="ptrcnull">
+    <title>{{ title }}</title>
+    <style>
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        body {
+            font-family: sans-serif;
+            background-color: rgb(40, 22, 26);
+            color: white;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        main {
+            flex: 1 0;
+        }
+        h1 {
+            font-size: 10rem;
+            text-shadow: 5px 5px #ff0000;
+        }
+        h3 {
+            font-size: 3rem;
+        }
+        footer {
+            margin: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="center">
+    <main class="center">
+        <h1>{{ code }}</h1>
+        <h3>{{ description }}</h3>
+    </main>
+    <footer>nginx at {{ server }}</footer>
+</body>
+</html>
