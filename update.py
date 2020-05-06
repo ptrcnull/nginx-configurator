@@ -5,6 +5,7 @@ import sys
 
 from generator.certificates import get_certificates, issue_certificate
 from generator.config import Config
+from generator.generate_error_pages import generate_error_pages
 from generator.subprocess import run
 from generator.templates import server, server_http
 import argparse
@@ -12,6 +13,8 @@ import argparse
 
 def generate(args):
     makedirs(args.out, exist_ok=True)
+
+    generate_error_pages()
 
     certificates = get_certificates()
     config = Config('config.json')

@@ -12,7 +12,7 @@ SSL forced by default (using Certbot)
   * Python 3.6
   * Certbot
   * Docker with docker-compose
-- Run `generate.py`
+- Run `update.py`
 
 # Configuration
 |   Keyword   | Description | Examples |
@@ -40,6 +40,3 @@ You can temporarily disable domains by prefixing them with `_`
   "example.com": "nohostproxy https://bjornskjald.github.io"
 }
 ```
-
-# TODO
-- Detecting Certbot plugins
