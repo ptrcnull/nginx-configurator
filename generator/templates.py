@@ -64,6 +64,7 @@ def server(certificates: Certificates, domain: Domain) -> str:
 
 
 def server_http(domain: Domain) -> str:
+    log_host = domain.host.replace('*', 'wildcard')
     rendered = f'''
         {cache(domain)}
 
