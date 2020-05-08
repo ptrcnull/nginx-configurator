@@ -6,9 +6,6 @@ services:
     image: nginx:latest
     restart: always
     network_mode: host
-    ports:
-      - 0.0.0.0:80:80
-      - 0.0.0.0:443:443
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - ./nginx:/etc/nginx/conf.d
@@ -16,4 +13,5 @@ services:
       - ./html:/etc/nginx/html
       - ./cache:/var/nginx/cache
       - ./logs:/var/log/nginx
+      - ./well-known:/well-known
       - /var/www:/var/www

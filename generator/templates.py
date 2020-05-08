@@ -57,7 +57,7 @@ def server(certificates: Certificates, domain: Domain) -> str:
             {static(domain)}
             {locations(domain)}
 
-            include $_error.conf;
+            include _error.conf;
         }}
     '''
     return formatted(rendered)
@@ -79,7 +79,7 @@ def server_http(domain: Domain) -> str:
             {static(domain)}
             {locations(domain)}
 
-            include $_error.conf;
+            include _error.conf;
         }}
     '''
     return formatted(rendered)
