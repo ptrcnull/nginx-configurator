@@ -8,7 +8,7 @@ services:
     network_mode: host
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
-      - ./nginx:/etc/nginx/conf.d
+      - ./conf:/etc/nginx/conf.d
       - ./auth:/etc/nginx/auth
       - ./html:/etc/nginx/html
       - ./cache:/var/nginx/cache

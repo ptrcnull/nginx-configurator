@@ -1,8 +1,7 @@
 cache/*
 __pycache__/
 
-nginx/*.conf
-!nginx/_*
+conf/sites/
 
 html/*.html
 !html/template.html

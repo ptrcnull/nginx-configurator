@@ -48,8 +48,8 @@ if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
     parser = argparse.ArgumentParser(description='Generate Nginx configuration.')
-    parser.add_argument('-o', '--out', default='./nginx', metavar='path',
-                        help='Output directory (default: current directory)')
+    parser.add_argument('-o', '--out', default='./conf/sites', metavar='path',
+                        help='Output directory (default: ./conf/sites)')
     parser.add_argument('--no-update', action='store_true',
                         help='Don\'t update Git repository')
     _args = parser.parse_args()
