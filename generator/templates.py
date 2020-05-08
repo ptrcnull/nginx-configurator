@@ -56,6 +56,8 @@ def server(certificates: Certificates, domain: Domain) -> str:
             server_name {domain.host};
             {static(domain)}
             {locations(domain)}
+
+            include $_error.conf;
         }}
     '''
     return formatted(rendered)
@@ -64,14 +66,19 @@ def server(certificates: Certificates, domain: Domain) -> str:
 def server_http(domain: Domain) -> str:
     rendered = f'''
         {cache(domain)}
-        
+
         server {{
             listen 80;
             listen [::]:80;
 
+            access_log /var/log/nginx/access/{log_host}.log vcombined;
+            error_log /var/log/nginx/error/{log_host}.log;
+
             server_name {domain.host};
             {static(domain)}
             {locations(domain)}
+
+            include $_error.conf;
         }}
     '''
     return formatted(rendered)

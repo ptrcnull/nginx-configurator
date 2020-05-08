@@ -6,10 +6,10 @@ def generate_error_pages():
     from .subprocess import run
     hostname = run(['hostname'])[0]
 
-    if Path('../html/400.html').exists():
+    if Path('html/400.html').exists():
         return
 
-    with open('../html/template.html') as tmpl:
+    with open('html/template.html') as tmpl:
         tmpllines = tmpl.readlines()
         for status in HTTPStatus:
             code = status.value
@@ -25,7 +25,7 @@ def generate_error_pages():
                         .replace('{{ description }}', desc)
                         .replace('{{ server }}', hostname))
 
-            with open(f'../html/{code}.html', 'w') as out:
+            with open(f'html/{code}.html', 'w') as out:
                 out.writelines(map(replace, tmpllines))
 
 

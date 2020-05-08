@@ -2,8 +2,9 @@ cache/*
 __pycache__/
 
 nginx/*.conf
-!nginx/$_https-redirect.conf
-!nginx/$_ws-proxy.conf
-!nginx/$_log-format.conf
+!nginx/$_*
+
+html/*.html
+!html/template.html
 
 logs/
